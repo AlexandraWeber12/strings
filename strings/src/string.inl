@@ -1,4 +1,5 @@
 #include "./string.h"
+#include <vector>
 
 
 namespace swe2 {
@@ -13,11 +14,21 @@ namespace swe2 {
     }
   }
 
-  template <character C> string <C>::string(const_pointer) {
+  template <character C> string <C>::string(const_pointer input) {
+    std::vector<char> chars{};
+    for (int characterIndex = 0; input[characterIndex] != '\0'; characterIndex++)
+    {
+      chars.push_back(input[characterIndex]);
+    }
+    chars.push_back('\0');
 
+    m_size = chars.size();
+    m_data = new value_type[m_size];
 
-
-
+    for (int characterIndex = 0; characterIndex < m_size; characterIndex++)
+    {
+      m_data[characterIndex] = chars[characterIndex];
+    }
   }
 
   template <character C> string <C>::string(const_pointer, size_type count) {

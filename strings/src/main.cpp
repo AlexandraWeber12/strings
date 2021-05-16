@@ -4,10 +4,10 @@
 using namespace swe2::string_literals;
 
 int main() {
-  swe2::string ctorWithLengthAndCharacter1{ std::size_t{ 0 }, 'A' };
-  swe2::string ctorWithLengthAndCharacter2{ 10, 'A' };
+  //swe2::string ctorWithLengthAndCharacter1{ std::size_t{ 0 }, 'A' };
+  //swe2::string ctorWithLengthAndCharacter2{ 10, 'A' };
 
-
+  swe2::string ctorWithLengthAndCharacter2{"Test"};
 
   /*swe2::string s1;
    swe2::string s2;
