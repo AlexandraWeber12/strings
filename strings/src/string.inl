@@ -24,11 +24,7 @@ namespace swe2 {
 
     m_size = chars.size();
     m_data = new value_type[m_size];
-
-    for (int characterIndex = 0; characterIndex < m_size; characterIndex++)
-    {
-      m_data[characterIndex] = chars[characterIndex];
-    }
+    std::copy(chars.begin(), chars.end(), m_data);
   }
 
   template <character C> string <C>::string(const_pointer, size_type count) {
