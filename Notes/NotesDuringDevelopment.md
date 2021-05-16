@@ -18,3 +18,12 @@ Following line creates a specific template:
 
 The assignment of `char` can be seen as a default parameter for the template. Results in the possibility to not always have to 
 state `<char>` when using the template type.
+
+# Step 2: ctors
+
+
+Is there a way to replace the following two lines of code with a single line initialization?
+```cpp
+	m_data = new value_type[m_size];
+    std::fill(m_data, m_data + count, chr);
+```
