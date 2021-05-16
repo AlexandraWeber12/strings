@@ -1,4 +1,5 @@
 #include "./string.h"
+#include "vld.h"
 
 using namespace swe2::string_literals;
 
