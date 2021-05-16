@@ -4,8 +4,7 @@
 namespace swe2 {
 
   template <character C> string <C>::string(size_type count, value_type chr) {
-
-    if (count != 0)
+    if (count)
     {
       m_size = count + 1; // + 1 to include end of string
       m_data = new value_type[m_size];
@@ -15,9 +14,13 @@ namespace swe2 {
   }
 
   template <character C> string <C>::string(const_pointer) {
+
+
+
+
   }
 
-  template <character C> string <C>::string(const_pointer, value_type count) {
+  template <character C> string <C>::string(const_pointer, size_type count) {
   }
 
   template <character C> string <C>::string(string const&, size_type pos) {

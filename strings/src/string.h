@@ -25,7 +25,7 @@ template <character C = char> class string final {
 
       string (size_type count, value_type chr);
       string (const_pointer);
-      string (const_pointer, value_type count);
+      string (const_pointer, size_type count);
       string (string const &, size_type pos);
       string (string const &, size_type pos, size_type count);
 
