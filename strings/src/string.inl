@@ -15,8 +15,19 @@ namespace swe2 {
   }
 
   template <character C> string <C>::string(const_pointer input) {
+    createFromConstPtr(input);
+  }
+
+  template <character C> string <C>::string(const_pointer input, size_type count) {
+    // string{"hallo",2} -> "hal"
+    // increase count by one to accommodate the usage of count within loop instead of offset
+    createFromConstPtr(input, ++count);
+  }
+
+  template <character C> void string <C>::createFromConstPtr(const_pointer input, int count) {
     std::vector<char> chars{};
-    for (int characterIndex = 0; input[characterIndex] != '\0'; characterIndex++)
+    
+    for (int characterIndex = 0; input[characterIndex] != '\0' && count != characterIndex; ++characterIndex)
     {
       chars.push_back(input[characterIndex]);
     }
@@ -25,9 +36,6 @@ namespace swe2 {
     m_size = chars.size();
     m_data = new value_type[m_size];
     std::copy(chars.begin(), chars.end(), m_data);
-  }
-
-  template <character C> string <C>::string(const_pointer, size_type count) {
   }
 
   template <character C> string <C>::string(string const&, size_type pos) {
@@ -94,7 +102,7 @@ namespace swe2 {
     return *this;
   }
 
-  template <character C> string <C>& string <C>::append(const_pointer, value_type count) {
+  template <character C> string <C>& string <C>::append(const_pointer, size_type count) {
     return *this;
   }
 

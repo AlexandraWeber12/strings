@@ -50,7 +50,7 @@ template <character C = char> class string final {
 
       string & append  (size_type count, value_type chr);
       string & append  (const_pointer);
-      string & append  (const_pointer, value_type count);
+      string & append  (const_pointer, size_type count);
       string & append  (string const &);
       string & append  (string const &, size_type pos);
       string & append  (string const &, size_type pos, size_type count);
@@ -79,6 +79,7 @@ template <character C = char> class string final {
    private:
       pointer   m_data {nullptr};
       size_type m_size {0};
+      void createFromConstPtr(const_pointer, int count = -1);
 };
 
 }   // namespace swe2

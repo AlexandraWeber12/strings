@@ -32,5 +32,7 @@ It was tried to std::move(vector.data()).
 ```cpp
 	string(const_pointer input)
 ```
+# ++ pre/post increment
 
+Post increment requires saving the current value, pre does not need that. Prefere pre over post in most cases when the return value of the ++-operator is not required.
 
