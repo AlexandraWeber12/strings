@@ -47,10 +47,15 @@ namespace swe2 {
     std::copy(chars.begin(), chars.end(), m_data);
   }
 
-  template <character C> string <C>::string(string const&) {
+  template <character C> string <C>::string(string const& input) {
+    createFromConstPtr(input.data());
   }
 
-  template <character C> string <C>::string(string&&) noexcept {
+  template <character C> string <C>::string(string&& input) noexcept {
+    m_data = input.m_data;
+    m_size = input.m_size;
+    input.m_data = nullptr;
+    input.m_size = 0;
   }
 
   template <character C> string <C>::~string() {
@@ -159,7 +164,7 @@ namespace swe2 {
   }
 
   template <character C> typename string <C>::size_type string <C>::size() const {
-    return 0;
+    return m_size;
   }
 
   template <character C> void string <C>::swap(string&) noexcept {
