@@ -24,10 +24,13 @@ namespace swe2 {
     createFromConstPtr(input, ++count);
   }
 
-  template <character C> string <C>::string(string const&, size_type) {
+  template <character C> string <C>::string(string const& input, size_type pos) {
+    createFromConstPtr(input.data(), -1, pos);
   }
 
-  template <character C> string <C>::string(string const&, size_type pos, size_type count) {
+  template <character C> string <C>::string(string const& input, size_type pos, size_type count) {
+    // new string should end count characters after pos
+    createFromConstPtr(input.data(), count + pos, pos);
   }
 
   template <character C> void string <C>::createFromConstPtr(const_pointer input, int endIndex, int startIndex) {

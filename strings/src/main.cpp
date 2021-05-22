@@ -11,19 +11,21 @@ int main() {
   //swe2::string ctorWithLengthAndCharacter2{ "Test", 2 };
   //swe2::string ctorWithLengthAndCharacter2{ "Test", 0 };
 
-
   /*const swe2::string ctorWithLengthAndCharacter1{ "Test" };
   char const* test{ ctorWithLengthAndCharacter1.data() };*/
+  /* swe2::string ctorWithLengthAndCharacter1{ "Test" };
+   char* test{ ctorWithLengthAndCharacter1.data() };*/
+   /*swe2::string ctorWithLengthAndCharacter1{ "Test" };
+   swe2::string ctorWithLengthAndCharacter2{ ctorWithLengthAndCharacter1, 2 };*/
+   /*swe2::string ctorWithLengthAndCharacter1{ "TestOneMore" };
+   swe2::string ctorWithLengthAndCharacter2{ ctorWithLengthAndCharacter1, 2 , 5};*/
 
- /* swe2::string ctorWithLengthAndCharacter1{ "Test" };
-  char* test{ ctorWithLengthAndCharacter1.data() };*/
+   /*swe2::string s1;
+    swe2::string s2;
+    auto         s3 { "abc"_s};
+    auto         s4 {L"abc"_s};
 
-  /*swe2::string s1;
-   swe2::string s2;
-   auto         s3 { "abc"_s};
-   auto         s4 {L"abc"_s};
-
-   auto const c1 {s1 <=> s2};
-   auto const c2 {s1 <   s2};*/
-   // auto const c3 {s1 !=  s2};
+    auto const c1 {s1 <=> s2};
+    auto const c2 {s1 <   s2};*/
+    // auto const c3 {s1 !=  s2};
 }
