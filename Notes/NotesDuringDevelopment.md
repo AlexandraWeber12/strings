@@ -36,3 +36,5 @@ It was tried to std::move(vector.data()).
 
 Post increment requires saving the current value, pre does not need that. Prefere pre over post in most cases when the return value of the ++-operator is not required.
 
+# r-value reference
+The r-value reference was used for the move ctor. It seemed like that the r-value reference of the "object-to-be-moved-from" enables the access to private member variables.
