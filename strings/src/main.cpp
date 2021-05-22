@@ -12,8 +12,11 @@ int main() {
   //swe2::string ctorWithLengthAndCharacter2{ "Test", 0 };
 
 
+  /*const swe2::string ctorWithLengthAndCharacter1{ "Test" };
+  char const* test{ ctorWithLengthAndCharacter1.data() };*/
 
-
+ /* swe2::string ctorWithLengthAndCharacter1{ "Test" };
+  char* test{ ctorWithLengthAndCharacter1.data() };*/
 
   /*swe2::string s1;
    swe2::string s2;

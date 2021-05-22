@@ -24,10 +24,16 @@ namespace swe2 {
     createFromConstPtr(input, ++count);
   }
 
-  template <character C> void string <C>::createFromConstPtr(const_pointer input, int count) {
+  template <character C> string <C>::string(string const&, size_type) {
+  }
+
+  template <character C> string <C>::string(string const&, size_type pos, size_type count) {
+  }
+
+  template <character C> void string <C>::createFromConstPtr(const_pointer input, int endIndex, int startIndex) {
     std::vector<char> chars{};
-    
-    for (int characterIndex = 0; input[characterIndex] != '\0' && count != characterIndex; ++characterIndex)
+
+    for (int characterIndex = startIndex; input[characterIndex] != '\0' && endIndex != characterIndex; ++characterIndex)
     {
       chars.push_back(input[characterIndex]);
     }
@@ -36,12 +42,6 @@ namespace swe2 {
     m_size = chars.size();
     m_data = new value_type[m_size];
     std::copy(chars.begin(), chars.end(), m_data);
-  }
-
-  template <character C> string <C>::string(string const&, size_type pos) {
-  }
-
-  template <character C> string <C>::string(string const&, size_type pos, size_type count) {
   }
 
   template <character C> string <C>::string(string const&) {
@@ -87,11 +87,13 @@ namespace swe2 {
   }
 
   template <character C> typename string <C>::pointer string <C>::data() {
-    return nullptr;
+    pointer pointerToData{ m_data };
+    return pointerToData;
   }
 
   template <character C> typename string <C>::const_pointer string <C>::data() const {
-    return nullptr;
+    const_pointer constPointerToData{ m_data };
+    return constPointerToData;
   }
 
   template <character C> string <C>& string <C>::append(size_type count, value_type chr) {

@@ -46,7 +46,7 @@ template <character C = char> class string final {
       [[nodiscard]] const_reference at    (size_type idx) const;
       [[nodiscard]] const_pointer   c_str () const;
       [[nodiscard]] pointer         data  ();
-      [[nodiscard]] const_pointer   data  () const;
+      [[nodiscard]] const_pointer   data() const;
 
       string & append  (size_type count, value_type chr);
       string & append  (const_pointer);
@@ -79,7 +79,7 @@ template <character C = char> class string final {
    private:
       pointer   m_data {nullptr};
       size_type m_size {0};
-      void createFromConstPtr(const_pointer, int count = -1);
+      void createFromConstPtr(const_pointer, int endIndex = -1, int startIndex = 0);
 };
 
 }   // namespace swe2
