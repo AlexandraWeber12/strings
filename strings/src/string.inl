@@ -62,11 +62,21 @@ namespace swe2 {
     clear();
   }
 
-  template <character C> string <C>& string <C>::operator = (string const&) {
+  template <character C> string <C>& string <C>::operator = (string const& input) {
+
+    createFromConstPtr(input.data());
+
+    // use this if not a deep copy should be created
+    //m_data = input.m_data;
+    //m_size = input.m_size;
     return *this;
   }
 
-  template <character C> string <C>& string <C>::operator = (string&&) noexcept {
+  template <character C> string <C>& string <C>::operator = (string&& input) noexcept {
+    m_data = std::move(input.m_data);
+    m_size = std::move(input.m_size);
+    input.m_data = nullptr;
+    input.m_size = 0;
     return *this;
   }
 

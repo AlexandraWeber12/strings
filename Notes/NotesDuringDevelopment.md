@@ -38,3 +38,9 @@ Post increment requires saving the current value, pre does not need that. Prefer
 
 # r-value reference
 The r-value reference was used for the move ctor. It seemed like that the r-value reference of the "object-to-be-moved-from" enables the access to private member variables.
+
+# Copy assignment operator
+Why can private members accessed in these functions when passed as const&? Same was done before with && references.
+What is the usual behavior of a copy assignment operator? Does this make a deep copy of the assigned members?
+Should pointer type members only be assigned, should container type members be recreated? 
+Should a check be added for self assignment?

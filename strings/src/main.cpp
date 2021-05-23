@@ -23,7 +23,12 @@ int main() {
   swe2::string ctorWithLengthAndCharacter2{ ctorWithLengthAndCharacter1 };*/
   /*swe2::string ctorWithLengthAndCharacter1{ "Test" };
   swe2::string ctorWithLengthAndCharacter2{ std::move(ctorWithLengthAndCharacter1) };*/
-
+  /*swe2::string ctorWithLengthAndCharacter1{ "Test" };
+  swe2::string ctorWithLengthAndCharacter2{};
+  ctorWithLengthAndCharacter2 = ctorWithLengthAndCharacter1;*/
+  /*swe2::string ctorWithLengthAndCharacter1{ "Test" };
+  swe2::string ctorWithLengthAndCharacter2{};
+  ctorWithLengthAndCharacter2 = std::move(ctorWithLengthAndCharacter1);*/
 
    /*swe2::string s1;
     swe2::string s2;
