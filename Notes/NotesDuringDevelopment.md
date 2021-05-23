@@ -44,3 +44,7 @@ Why can private members accessed in these functions when passed as const&? Same 
 What is the usual behavior of a copy assignment operator? Does this make a deep copy of the assigned members?
 Should pointer type members only be assigned, should container type members be recreated? 
 Should a check be added for self assignment?
+
+# index operator
+Difference between the index operator returning a const ref vs ref is only decided by the return value type of the method.
+The const specifier of the calling object decides which of the index operator implementations is used.

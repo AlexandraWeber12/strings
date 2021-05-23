@@ -80,6 +80,7 @@ template <character C = char> class string final {
       pointer   m_data {nullptr};
       size_type m_size {0};
       void createFromConstPtr(const_pointer, int endIndex = -1, int startIndex = 0);
+      void indexInValidRange(size_type idx) const;
 };
 
 }   // namespace swe2

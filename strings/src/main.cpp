@@ -29,6 +29,28 @@ int main() {
   /*swe2::string ctorWithLengthAndCharacter1{ "Test" };
   swe2::string ctorWithLengthAndCharacter2{};
   ctorWithLengthAndCharacter2 = std::move(ctorWithLengthAndCharacter1);*/
+  /*swe2::string ctorWithLengthAndCharacter1{ "Te" };
+  swe2::string ctorWithLengthAndCharacter2{ "st" };
+  ctorWithLengthAndCharacter1 += ctorWithLengthAndCharacter2;*/
+  /*swe2::string ctorWithLengthAndCharacter1{ "Test" };
+  char& characterRef = ctorWithLengthAndCharacter1[2];
+  characterRef = 'A';*/
+  //const swe2::string ctorWithLengthAndCharacter1{ "Test" };
+  //const char& characterRef = ctorWithLengthAndCharacter1[2];
+  /*swe2::string ctorWithLengthAndCharacter1{ "Test" };
+  char& test = ctorWithLengthAndCharacter1.at(2);*/
+  /*const swe2::string ctorWithLengthAndCharacter1{ "Test" };
+  try
+  {
+    const char& test = ctorWithLengthAndCharacter1.at(10);
+  }
+  catch (const std::out_of_range& ex)
+  {
+    std::cout << ex.what() << "\n";
+  }
+  */
+ 
+
 
    /*swe2::string s1;
     swe2::string s2;

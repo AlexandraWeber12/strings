@@ -80,24 +80,40 @@ namespace swe2 {
     return *this;
   }
 
-  template <character C> string <C>& string <C>::operator += (string const&) {
+  template <character C> string <C>& string <C>::operator += (string const& input) {
+    if (empty())
+    {
+      createFromConstPtr(input.data());
+      return *this;
+    }
+    std::vector<char> chars{m_data, m_data + m_size - 1 };
+    chars.insert(chars.end(), input.m_data, input.m_data + input.m_size);
     return *this;
   }
 
   template <character C> typename string <C>::reference string <C>::operator [] (size_type idx) {
-    static C t{}; return t;
+    return *(m_data + idx);
   }
 
   template <character C> typename string <C>::const_reference string <C>::operator [] (size_type idx) const {
-    static C t{}; return t;
+    return *(m_data + idx);
   }
 
   template <character C> typename string <C>::reference string <C>::at(size_type idx) {
-    static C t{}; return t;
+    indexInValidRange(idx);
+    return this->operator[](idx);
   }
 
   template <character C> typename string <C>::const_reference string <C>::at(size_type idx) const {
-    static C t{}; return t;
+    indexInValidRange(idx);
+    return this->operator[](idx);
+  }
+
+  template <character C> void string <C>::indexInValidRange(size_type idx) const {
+    if (idx > m_size)
+    {
+      throw std::out_of_range("Index out of range.");
+    }
   }
 
   template <character C> typename string <C>::const_pointer string <C>::c_str() const {
@@ -170,7 +186,7 @@ namespace swe2 {
   }
 
   template <character C> bool string <C>::empty() const {
-    return false;
+    return m_size == 0;
   }
 
   template <character C> typename string <C>::size_type string <C>::size() const {
