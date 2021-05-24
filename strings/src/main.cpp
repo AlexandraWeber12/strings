@@ -53,7 +53,12 @@ int main() {
   ctorWithLengthAndCharacter1.append(3, 'A');*/
   /*swe2::string ctorWithLengthAndCharacter1{ "Test" };
 ctorWithLengthAndCharacter1.append("Test", 2);*/
-
+  /*swe2::string ctorWithLengthAndCharacter1{ "Test" };
+  swe2::string ctorWithLengthAndCharacter2{ "Test" };
+  ctorWithLengthAndCharacter1.append(ctorWithLengthAndCharacter2);*/
+  /*swe2::string ctorWithLengthAndCharacter1{ "Test" };
+  swe2::string ctorWithLengthAndCharacter2{ "AnotherTestString" };
+  ctorWithLengthAndCharacter1.append(ctorWithLengthAndCharacter2, 1, 2);*/
 
 /*swe2::string s1;
  swe2::string s2;

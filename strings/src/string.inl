@@ -155,15 +155,20 @@ namespace swe2 {
     return *this;
   }
 
-  template <character C> string <C>& string <C>::append(string const&) {
+  template <character C> string <C>& string <C>::append(string const& input) {
+    this->operator+=(input);
     return *this;
   }
 
-  template <character C> string <C>& string <C>::append(string const&, size_type pos) {
+  template <character C> string <C>& string <C>::append(string const& input, size_type pos) {
+    const string newString{ input, pos };
+    this->operator+=(newString);
     return *this;
   }
 
-  template <character C> string <C>& string <C>::append(string const&, size_type pos, size_type count) {
+  template <character C> string <C>& string <C>::append(string const& input, size_type pos, size_type count) {
+    const string newString{ input, pos, count };
+    this->operator+=(newString);
     return *this;
   }
 
