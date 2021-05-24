@@ -38,6 +38,9 @@ namespace swe2 {
   template <character C> void string <C>::createFromConstPtr(const_pointer input, int32_t endIndex, size_type startIndex) {
     std::vector<C> chars{};
 
+    // increase by 1 to consider \0 being a valid position for access
+    indexInValidRange(startIndex, getSizeOfCArray(input));
+
     for (size_type characterIndex = startIndex; input[characterIndex] != '\0' && endIndex != characterIndex; ++characterIndex)
     {
       chars.push_back(input[characterIndex]);
@@ -45,6 +48,16 @@ namespace swe2 {
     chars.push_back('\0');
 
     assignVectorDataToMembers(chars);
+  }
+
+
+  template <character C> typename string <C>::size_type string <C>::getSizeOfCArray(const_pointer input) const {
+    size_type sizeOfArray{};
+    for (sizeOfArray = 0; input[sizeOfArray] != '\0'; ++sizeOfArray)
+    {
+      //do nothing
+    }
+    return ++sizeOfArray;
   }
 
   template <character C> void string <C>::assignVectorDataToMembers(std::vector<C>& input) {
@@ -99,25 +112,27 @@ namespace swe2 {
   }
 
   template <character C> typename string <C>::reference string <C>::operator [] (size_type idx) {
+    indexInValidRange(idx, m_size);
     return *(m_data + idx);
   }
 
   template <character C> typename string <C>::const_reference string <C>::operator [] (size_type idx) const {
+    indexInValidRange(idx, m_size);
     return *(m_data + idx);
   }
 
   template <character C> typename string <C>::reference string <C>::at(size_type idx) {
-    indexInValidRange(idx);
+    indexInValidRange(idx, m_size);
     return this->operator[](idx);
   }
 
   template <character C> typename string <C>::const_reference string <C>::at(size_type idx) const {
-    indexInValidRange(idx);
+    indexInValidRange(idx, m_size);
     return this->operator[](idx);
   }
 
-  template <character C> void string <C>::indexInValidRange(size_type idx) const {
-    if (idx > m_size)
+  template <character C> void string <C>::indexInValidRange(size_type idx, size_type size) const {
+    if (idx > size)
     {
       throw std::out_of_range("Index out of range.");
     }
@@ -173,15 +188,16 @@ namespace swe2 {
   }
 
   template <character C> int string <C>::compare(string const& rhs) const {
-    return compareObjects(rhs);
+    return compareObjects(*this, rhs);
   }
 
-  template <character C> int string <C>::compareObjects(string const& rhs) const {
-    size_type stringToCompareLength = rhs.size();
-    size_type shorterStringLength{ m_size < stringToCompareLength ? m_size : stringToCompareLength };
+  template <character C> int string <C>::compareObjects(string const& lhs, string const& rhs) const {
+    size_type lhsLength = lhs.size();
+    size_type rhsLength = rhs.size();
+    size_type shorterStringLength{ lhsLength < rhsLength ? lhsLength : rhsLength };
     for (size_type i = 0; i < shorterStringLength - 1; ++i) // -1 to not compare \0
     {
-      C lhsChar = *(m_data + i);
+      C lhsChar = lhs[i];
       C rhsChar = rhs[i];
       if (lhsChar > rhsChar)
       {
@@ -194,11 +210,11 @@ namespace swe2 {
       }
     }
 
-    if (m_size > stringToCompareLength)
+    if (lhsLength > rhsLength)
     {
       return 1;
     }
-    else if (m_size < stringToCompareLength)
+    else if (lhsLength < rhsLength)
     {
       return -1;
     }
@@ -206,24 +222,36 @@ namespace swe2 {
   }
 
   template <character C> int string <C>::compare(size_type pos, size_type count, string const& input) const {
-    string subString{ input , pos, count};
-    return compareObjects(subString);
+    indexInValidRange(pos, m_size);
+    string subString{ *this, pos, count };
+    return compareObjects(subString, input);
   }
 
-  template <character C> int string <C>::compare(size_type posl, size_type countl, string const&, size_type posr, size_type countr) const {
-    return 0;
+  template <character C> int string <C>::compare(size_type posl, size_type countl, string const& input, size_type posr, size_type countr) const {
+    indexInValidRange(posl, m_size);
+    indexInValidRange(posr, input.size());
+    string subStringL{ *this, posl, countl };
+    string subStringR{ input, posr, countr };
+    return compareObjects(subStringL, subStringR);
   }
 
-  template <character C> int string <C>::compare(const_pointer) const {
-    return 0;
+  template <character C> int string <C>::compare(const_pointer input) const {
+    string rhs{ input };
+    return compareObjects(*this, rhs);
   }
 
-  template <character C> int string <C>::compare(size_type pos, size_type count, const_pointer) const {
-    return 0;
+  template <character C> int string <C>::compare(size_type pos, size_type count, const_pointer input) const {
+    indexInValidRange(pos, m_size);
+    string rhs{ input + pos, count };
+    return compareObjects(*this, rhs);
   }
 
-  template <character C> int string <C>::compare(size_type posl, size_type countl, const_pointer, size_type countr) const {
-    return 0;
+  template <character C> int string <C>::compare(size_type posl, size_type countl, const_pointer input, size_type posr, size_type countr) const {
+    indexInValidRange(posl, m_size);
+    indexInValidRange(posr, getSizeOfCArray(input));
+    string subStringL{ *this, posl, countl };
+    string subStringR{ input, posr, countr };
+    return compareObjects(subStringL, subStringR);
   }
 
   template <character C> void string <C>::clear() {

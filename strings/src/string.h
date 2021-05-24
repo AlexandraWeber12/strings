@@ -63,7 +63,7 @@ template <character C = char> class string final {
       [[nodiscard]] int compare (size_type posl, size_type countl, string const &, size_type posr, size_type countr = npos) const;
       [[nodiscard]] int compare (const_pointer) const;
       [[nodiscard]] int compare (size_type pos, size_type count, const_pointer) const;
-      [[nodiscard]] int compare (size_type posl, size_type countl, const_pointer, size_type countr) const;
+      [[nodiscard]] int compare (size_type posl, size_type countl, const_pointer, size_type posr, size_type countr) const;
 
                     void      clear ();
       [[nodiscard]] bool      empty () const;
@@ -83,9 +83,10 @@ template <character C = char> class string final {
       pointer   m_data {nullptr};
       size_type m_size {0};
       void createFromConstPtr(const_pointer, int32_t endIndex = -1, size_type startIndex = 0);
-      void indexInValidRange(size_type idx) const;
+      void indexInValidRange(size_type idx, size_type size) const;
       void assignVectorDataToMembers(std::vector<C>& input);
-      int compareObjects(string const &rhs) const;
+      int compareObjects(string const& lhs, string const &rhs) const;
+      size_type getSizeOfCArray(const_pointer input) const;
 };
 
 }   // namespace swe2
