@@ -5,10 +5,13 @@
 #include <compare>
 #include <concepts>
 #include <iostream>
+#include <vector>
+#include <limits.h>
 
 namespace swe2 {
 
 template <typename C> concept character = std::same_as <C, char> || std::same_as <C, wchar_t>;
+constexpr int32_t MAXINT32 = std::numeric_limits<int>::max();
 
 template <character C = char> class string final {
    public:
@@ -79,8 +82,9 @@ template <character C = char> class string final {
    private:
       pointer   m_data {nullptr};
       size_type m_size {0};
-      void createFromConstPtr(const_pointer, int endIndex = -1, int startIndex = 0);
+      void createFromConstPtr(const_pointer, int32_t endIndex = -1, size_type startIndex = 0);
       void indexInValidRange(size_type idx) const;
+      void assignVectorDataToMembers(std::vector<C>& input);
 };
 
 }   // namespace swe2

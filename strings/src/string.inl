@@ -1,6 +1,5 @@
 #include "./string.h"
-#include <vector>
-
+#include <assert.h>
 
 namespace swe2 {
 
@@ -19,9 +18,10 @@ namespace swe2 {
   }
 
   template <character C> string <C>::string(const_pointer input, size_type count) {
+    assert(count < swe2::MAXINT32); // ensures count value is in range of int32_t
     // string{"hallo",2} -> "hal"
     // increase count by one to accommodate the usage of count within loop instead of offset
-    createFromConstPtr(input, ++count);
+    createFromConstPtr(input, static_cast<int32_t>(++count));
   }
 
   template <character C> string <C>::string(string const& input, size_type pos) {
@@ -29,22 +29,28 @@ namespace swe2 {
   }
 
   template <character C> string <C>::string(string const& input, size_type pos, size_type count) {
+    size_type endIndex = count + pos;
+    assert(endIndex <= swe2::MAXINT32);
     // new string should end count characters after pos
-    createFromConstPtr(input.data(), count + pos, pos);
+    createFromConstPtr(input.data(), static_cast<int32_t>(endIndex), pos);
   }
 
-  template <character C> void string <C>::createFromConstPtr(const_pointer input, int endIndex, int startIndex) {
-    std::vector<char> chars{};
+  template <character C> void string <C>::createFromConstPtr(const_pointer input, int32_t endIndex, size_type startIndex) {
+    std::vector<C> chars{};
 
-    for (int characterIndex = startIndex; input[characterIndex] != '\0' && endIndex != characterIndex; ++characterIndex)
+    for (size_type characterIndex = startIndex; input[characterIndex] != '\0' && endIndex != characterIndex; ++characterIndex)
     {
       chars.push_back(input[characterIndex]);
     }
     chars.push_back('\0');
 
-    m_size = chars.size();
+    assignVectorDataToMembers(chars);
+  }
+
+  template <character C> void string <C>::assignVectorDataToMembers(std::vector<C>& input) {
+    m_size = input.size();
     m_data = new value_type[m_size];
-    std::copy(chars.begin(), chars.end(), m_data);
+    std::copy(input.begin(), input.end(), m_data);
   }
 
   template <character C> string <C>::string(string const& input) {
@@ -86,8 +92,9 @@ namespace swe2 {
       createFromConstPtr(input.data());
       return *this;
     }
-    std::vector<char> chars{m_data, m_data + m_size - 1 };
+    std::vector<C> chars{m_data, m_data + m_size - 1 };
     chars.insert(chars.end(), input.m_data, input.m_data + input.m_size);
+    assignVectorDataToMembers(chars);
     return *this;
   }
 
@@ -117,7 +124,7 @@ namespace swe2 {
   }
 
   template <character C> typename string <C>::const_pointer string <C>::c_str() const {
-    return nullptr;
+    return data();
   }
 
   template <character C> typename string <C>::pointer string <C>::data() {
@@ -131,14 +138,20 @@ namespace swe2 {
   }
 
   template <character C> string <C>& string <C>::append(size_type count, value_type chr) {
+    const string newString{count, chr};
+    this->operator+=(newString);
     return *this;
   }
 
-  template <character C> string <C>& string <C>::append(const_pointer) {
+  template <character C> string <C>& string <C>::append(const_pointer input) {
+    const string newString{ input };
+    this->operator+=(newString);
     return *this;
   }
 
-  template <character C> string <C>& string <C>::append(const_pointer, size_type count) {
+  template <character C> string <C>& string <C>::append(const_pointer input, size_type count) {
+    const string newString{ input, count };
+    this->operator+=(newString);
     return *this;
   }
 
