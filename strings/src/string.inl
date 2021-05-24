@@ -92,7 +92,7 @@ namespace swe2 {
       createFromConstPtr(input.data());
       return *this;
     }
-    std::vector<C> chars{m_data, m_data + m_size - 1 };
+    std::vector<C> chars{ m_data, m_data + m_size - 1 };
     chars.insert(chars.end(), input.m_data, input.m_data + input.m_size);
     assignVectorDataToMembers(chars);
     return *this;
@@ -138,7 +138,7 @@ namespace swe2 {
   }
 
   template <character C> string <C>& string <C>::append(size_type count, value_type chr) {
-    const string newString{count, chr};
+    const string newString{ count, chr };
     this->operator+=(newString);
     return *this;
   }
@@ -172,7 +172,32 @@ namespace swe2 {
     return *this;
   }
 
-  template <character C> int string <C>::compare(string const&) const {
+  template <character C> int string <C>::compare(string const& rhs) const {
+    size_type stringToCompareLength = rhs.size();
+    size_type shorterStringLength{ m_size < stringToCompareLength ? m_size : stringToCompareLength };
+    for (size_type i = 0; i < shorterStringLength - 1; ++i) // -1 to not compare \0
+    {
+      C lhsChar = *(m_data + i);
+      C rhsChar = rhs[i];
+      if (lhsChar > rhsChar)
+      {
+        return 1;
+      }
+
+      if (lhsChar < rhsChar)
+      {
+        return -1;
+      }
+    }
+
+    if (m_size > stringToCompareLength)
+    {
+      return 1;
+    }
+    else if (m_size < stringToCompareLength)
+    {
+      return -1;
+    }
     return 0;
   }
 

@@ -53,19 +53,32 @@ int main() {
   ctorWithLengthAndCharacter1.append(3, 'A');*/
   /*swe2::string ctorWithLengthAndCharacter1{ "Test" };
 ctorWithLengthAndCharacter1.append("Test", 2);*/
-  /*swe2::string ctorWithLengthAndCharacter1{ "Test" };
-  swe2::string ctorWithLengthAndCharacter2{ "Test" };
-  ctorWithLengthAndCharacter1.append(ctorWithLengthAndCharacter2);*/
-  /*swe2::string ctorWithLengthAndCharacter1{ "Test" };
-  swe2::string ctorWithLengthAndCharacter2{ "AnotherTestString" };
-  ctorWithLengthAndCharacter1.append(ctorWithLengthAndCharacter2, 1, 2);*/
+/*swe2::string ctorWithLengthAndCharacter1{ "Test" };
+swe2::string ctorWithLengthAndCharacter2{ "Test" };
+ctorWithLengthAndCharacter1.append(ctorWithLengthAndCharacter2);*/
+/*swe2::string ctorWithLengthAndCharacter1{ "Test" };
+swe2::string ctorWithLengthAndCharacter2{ "AnotherTestString" };
+ctorWithLengthAndCharacter1.append(ctorWithLengthAndCharacter2, 1, 2);*/
 
-/*swe2::string s1;
- swe2::string s2;
- auto         s3 { "abc"_s};
- auto         s4 {L"abc"_s};
 
- auto const c1 {s1 <=> s2};
- auto const c2 {s1 <   s2};*/
- // auto const c3 {s1 !=  s2};
+  swe2::string AA{ "" };
+  swe2::string AB{ "" };
+
+  std::cout << AA.compare(AB) << "\n";
+
+
+  std::string A{ "" };
+  std::string B{ "" };
+
+
+  std::cout << A.compare(B) << "\n";
+
+  /*swe2::string s1;
+   swe2::string s2;
+   auto         s3 { "abc"_s};
+   auto         s4 {L"abc"_s};
+
+   auto const c1 {s1 <=> s2};
+   auto const c2 {s1 <   s2};*/
+   // auto const c3 {s1 !=  s2};
 }
