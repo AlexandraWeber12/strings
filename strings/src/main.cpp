@@ -59,19 +59,14 @@ ctorWithLengthAndCharacter1.append(ctorWithLengthAndCharacter2);*/
 /*swe2::string ctorWithLengthAndCharacter1{ "Test" };
 swe2::string ctorWithLengthAndCharacter2{ "AnotherTestString" };
 ctorWithLengthAndCharacter1.append(ctorWithLengthAndCharacter2, 1, 2);*/
+  swe2::string AA{ "green apple" };
+  swe2::string AB{ "apple" };
+  std::cout << AB.compare(6, 5, AA) << "\n";
+  std::string A{ "green apple" };
+  std::string B{ "apple" };
+  std::cout << A.compare(6, 5, B) << "\n";
 
 
-  swe2::string AA{ "" };
-  swe2::string AB{ "" };
-
-  std::cout << AA.compare(AB) << "\n";
-
-
-  std::string A{ "" };
-  std::string B{ "" };
-
-
-  std::cout << A.compare(B) << "\n";
 
   /*swe2::string s1;
    swe2::string s2;

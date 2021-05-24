@@ -173,6 +173,10 @@ namespace swe2 {
   }
 
   template <character C> int string <C>::compare(string const& rhs) const {
+    return compareObjects(rhs);
+  }
+
+  template <character C> int string <C>::compareObjects(string const& rhs) const {
     size_type stringToCompareLength = rhs.size();
     size_type shorterStringLength{ m_size < stringToCompareLength ? m_size : stringToCompareLength };
     for (size_type i = 0; i < shorterStringLength - 1; ++i) // -1 to not compare \0
@@ -201,8 +205,9 @@ namespace swe2 {
     return 0;
   }
 
-  template <character C> int string <C>::compare(size_type pos, size_type count, string const&) const {
-    return 0;
+  template <character C> int string <C>::compare(size_type pos, size_type count, string const& input) const {
+    string subString{ input , pos, count};
+    return compareObjects(subString);
   }
 
   template <character C> int string <C>::compare(size_type posl, size_type countl, string const&, size_type posr, size_type countr) const {

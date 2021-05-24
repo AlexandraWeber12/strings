@@ -85,6 +85,7 @@ template <character C = char> class string final {
       void createFromConstPtr(const_pointer, int32_t endIndex = -1, size_type startIndex = 0);
       void indexInValidRange(size_type idx) const;
       void assignVectorDataToMembers(std::vector<C>& input);
+      int compareObjects(string const &rhs) const;
 };
 
 }   // namespace swe2
