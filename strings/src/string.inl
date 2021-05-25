@@ -269,26 +269,49 @@ namespace swe2 {
     return m_size;
   }
 
-  template <character C> void string <C>::swap(string&) noexcept {
+  template <character C> void string <C>::swap(string& input) noexcept {
+    std::swap(m_data, input.m_data);
+    std::swap(m_size, input.m_size);
   }
 
-  template <character T> string <T> operator + (string <T> const&, string <T> const&) {
-    return {};
+  template <character T> string <T> operator + (string <T> const& lhs, string <T> const& rhs) {
+    string newString{ lhs };
+    newString.append(rhs);
+    return newString;
   }
 
-  template <character T> bool operator == (string <T> const&, string <T> const&) {
-    return false;
+  template <character T> bool operator == (string <T> const& lhs, string <T> const& rhs) {
+    return lhs.compare(rhs) == 0;
   }
 
-  template <character T> std::strong_ordering operator <=> (string <T> const&, string <T> const&) {
-    return std::strong_ordering::equal;
+  template <character T> std::strong_ordering operator <=> (string <T> const& lhs, string <T> const& rhs) {
+
+    if (&lhs == &rhs)
+    {
+      return std::strong_ordering::equivalent;
+    }
+
+    switch (lhs.compare(rhs))
+    {
+    case -1:
+      return std::strong_ordering::less;
+    case 1:
+      return std::strong_ordering::greater;
+    default:
+      return std::strong_ordering::equal;
+    }
   }
 
-  template <character T> std::ostream& operator << (std::ostream& lhs, string <T> const&) {
+  template <character T> std::ostream& operator << (std::ostream& lhs, string <T> const& rhs) {
+    for (size_t idx = 0; idx < rhs.m_size; ++idx)
+    {
+      lhs << rhs[idx];
+    }
     return lhs;
   }
 
-  template <character T> void swap(string <T>&, string <T>&) noexcept {
+  template <character T> void swap(string <T>& rhs, string <T>& lhs) noexcept {
+    rhs.swap(lhs);
   }
 
 }   // namespace swe2
@@ -302,5 +325,4 @@ namespace swe2::string_literals {
   inline string <wchar_t> operator "" _s(wchar_t const*, std::size_t) {
     return {};
   }
-
 }   // namespace swe2::string_literals

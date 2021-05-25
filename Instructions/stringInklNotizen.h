@@ -77,7 +77,7 @@ template <character C = char> class string final {
       [[nodiscard]] size_type size  () const;           //längestring
                     void      swap  (string &) noexcept;//string s1 durch s2 austauschen
 
-      template <character T> [[nodiscard]] friend string <T> operator + (string <T> const &, string <T> const &); //außerhalt programmiert, hat aber zugriff auf private Komponenten -> hängt zwei s1 + s2 zusammen und erzeugt eine dritte
+      template <character T> [[nodiscard]] friend string <T> operator + (string <T> const &, string <T> const &); //außerhalb programmiert, hat aber zugriff auf private Komponenten -> hängt zwei s1 + s2 zusammen und erzeugt eine dritte
 
       template <character T> [[nodiscard]] friend bool                 operator ==  (string <T> const &, string <T> const &);   //vergleicht auf Gleichheit -> ungleich mitbeachten
       template <character T> [[nodiscard]] friend std::strong_ordering operator <=> (string <T> const &, string <T> const &);   //Space Ship Operator -> Strong ordering -> lExographisch alles miteinander Vergleichen
