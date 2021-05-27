@@ -5,7 +5,7 @@ template <template-parameter-list> concept concept-name = constraint-expression;
 
 
 ```cpp
-	template <typename C> concept character = std::same_as <C, char> || std::same_as <C, wchar_t>;
+    template <typename C> concept character = std::same_as <C, char> || std::same_as <C, wchar_t>;
 ```
 
 - `typename` is in a general case exchangeable with `class`.
@@ -13,7 +13,7 @@ template <template-parameter-list> concept concept-name = constraint-expression;
 
 Following line creates a specific template:
 ```cpp
-	template <character C = char> class string final
+    template <character C = char> class string final
 ```
 
 The assignment of `char` can be seen as a default parameter for the template. Results in the possibility to not always have to 
