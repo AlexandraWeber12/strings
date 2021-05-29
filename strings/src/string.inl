@@ -61,6 +61,7 @@ namespace swe2 {
   }
 
   template <character C> void string <C>::assignVectorDataToMembers(std::vector<C>& input) {
+    clear();
     m_size = input.size();
     m_data = new value_type[m_size];
     std::copy(input.begin(), input.end(), m_data);
@@ -255,11 +256,18 @@ namespace swe2 {
   }
 
   template <character C> bool string <C>::empty() const {
-    return m_size == 0;
+    // This has to be done with the current implementation as \0 has to be considered here as well.
+    // The check below is valid as it would consider only having \0 in case of "" as empty as well 
+    // as having a deleted swe2::string as empty. For production code the handling of size and empty
+    // would have to be refactored.
+    return m_size <= 1;
   }
 
   template <character C> typename string <C>::size_type string <C>::size() const {
-    return m_size;
+    // swe2::string m_size generally includes the \0 which is ignored for the size of std::string
+    // as the internal algorithmns of swe2::string work based on size including \0 this is the 
+    // simple fix.
+    return m_size - 1;
   }
 
   template <character C> void string <C>::swap(string& input) noexcept {
