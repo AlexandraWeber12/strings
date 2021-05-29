@@ -82,18 +82,13 @@ namespace swe2 {
   }
 
   template <character C> string <C>& string <C>::operator = (string const& input) {
-
     createFromConstPtr(input.data());
-
-    // use this if not a deep copy should be created
-    //m_data = input.m_data;
-    //m_size = input.m_size;
     return *this;
   }
 
   template <character C> string <C>& string <C>::operator = (string&& input) noexcept {
-    m_data = std::move(input.m_data);
-    m_size = std::move(input.m_size);
+    m_data = input.m_data;
+    m_size = input.m_size;
     input.m_data = nullptr;
     input.m_size = 0;
     return *this;
@@ -143,13 +138,11 @@ namespace swe2 {
   }
 
   template <character C> typename string <C>::pointer string <C>::data() {
-    pointer pointerToData{ m_data };
-    return pointerToData;
+    return m_data;
   }
 
   template <character C> typename string <C>::const_pointer string <C>::data() const {
-    const_pointer constPointerToData{ m_data };
-    return constPointerToData;
+    return const_cast<const_pointer>(m_data);
   }
 
   template <character C> string <C>& string <C>::append(size_type count, value_type chr) {
