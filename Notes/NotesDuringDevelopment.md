@@ -5,7 +5,7 @@ template <template-parameter-list> concept concept-name = constraint-expression;
 
 
 ```cpp
-	template <typename C> concept character = std::same_as <C, char> || std::same_as <C, wchar_t>;
+    template <typename C> concept character = std::same_as <C, char> || std::same_as <C, wchar_t>;
 ```
 
 - `typename` is in a general case exchangeable with `class`.
@@ -13,7 +13,7 @@ template <template-parameter-list> concept concept-name = constraint-expression;
 
 Following line creates a specific template:
 ```cpp
-	template <character C = char> class string final
+    template <character C = char> class string final
 ```
 
 The assignment of `char` can be seen as a default parameter for the template. Results in the possibility to not always have to 
@@ -23,15 +23,18 @@ state `<char>` when using the template type.
 
 Is there a way to replace the following two lines of code with a single line initialization?
 ```cpp
-	m_data = new value_type[m_size];
+    m_data = new value_type[m_size];
     std::fill(m_data, m_data + count, chr);
 ```
+Is fine like this and cannot easily be done otherwise. std::fill_n() could be used as well.
 
 Is it possible for the ctor stated below to get the content of the std::vector 'moved' to m_data?
 It was tried to std::move(vector.data()).
 ```cpp
-	string(const_pointer input)
+    string(const_pointer input)
 ```
+std::memcpy should be used with offsets according to string length. std::vector should not be needed.
+	
 # ++ pre/post increment
 
 Post increment requires saving the current value, pre does not need that. Prefere pre over post in most cases when the return value of the ++-operator is not required.
@@ -39,6 +42,8 @@ Post increment requires saving the current value, pre does not need that. Prefer
 # r-value reference
 The r-value reference was used for the move ctor. It seemed like that the r-value reference of the "object-to-be-moved-from" enables the access to private member variables.
 
+This is just like classes work, also for C++.
+	
 # Copy assignment operator
 Why can private members accessed in these functions when passed as const&? Same was done before with && references.
 What is the usual behavior of a copy assignment operator? Does this make a deep copy of the assigned members?
